@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorii</title>
+    <style>
+         body {
+            margin: 50;
+            font-family: cursive;
+            background-color: white;
+        }
+        /* NAVBAR */
+        .navbar {
+            background-color:rgb(49, 57, 75);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <a href="{% url 'home:home' %}">FeldeFel</a>
+        </div>
+        <nav class="nav-links">
+            <a href="{% url 'home:despre' %}">Despre noi</a>
+            <a href="{% url 'home:categorii' %}">Categorii</a>
+            <a href="{% url 'cart:cart_url' %}">Coș</a>
+        </nav>
+    </header>
+<!-- <nav>
+    <div class="navbar-container">
+        <a href="{% url 'home:home' %}" class="nav-link">Acasa</a>
+        <a href="{% url 'home:categorii' %}" class="nav-link">Categorii</a>
+        <a href="{% url 'cart:cart_url' %}" class="nav-link">Cos</a>      
+    </div>
+</nav>  -->
+
+<h1> Categorii </h1>
+<ul>
+    <li><a href="{% url 'aranjamente_ceara:wax_arrangements_url' %}">Aranjamente din ceara</a></li>
+    <li><a href="{% url 'aranjamente_flori:naturale' %}">Flori naturale</a></li>
+    <li><a href="{% url 'aranjamente_flori:artificiale' %}">Flori artificiale</a></li>
+    <li><a href="{% url 'decoratiuni:decoratiuni_onyx' %}">Decoratiuni din onix</a></li>
+    <li><a href="{% url 'decoratiuni:decoratiuni_rasina' %}">Decoratiuni din rasina</a></li>
+</ul>
+    
+</body>
+</html>

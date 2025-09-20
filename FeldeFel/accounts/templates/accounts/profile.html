@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Profile </title>
+    <style>
+        body {
+            margin: 5px;
+            font-family: cursive;
+            background-color: white;
+        }
+
+        .top-bar {
+            background-color: white;
+            color:black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .top-bar .logo a {
+            font-size: 24px;
+            font-family: cursive;
+            color: black;
+            text-decoration: none;
+        }
+
+        .top-bar a {
+            color: black;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        
+        /* .top-bar a:hover {
+            text-decoration: underline;
+        } */
+
+        .top-bar .search-box input {
+            padding: 5px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .top-bar .search-box button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+
+        .cart-link {
+            position: relative;
+            font-weight: normal;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .cart-badge {
+            background-color: rgb(237, 96, 96);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 12px;
+            vertical-align: middle;
+            line-height: 1;
+            min-width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .categories-bar {
+            color:black;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .categories-bar a {
+            color: black;
+            text-decoration: none;
+            padding: 0 15px;
+        }
+
+        .categories-bar a:hover {
+            color: black;
+            text-decoration: underline;
+            /* margin: 0 15px; */
+
+        }
+
+        /* ====== PROFILE PAGE ====== */
+        .profile-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: whitesmoke;
+            border-radius: 12px;
+            box-shadow: black;
+            margin-bottom: 70px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid white;
+        }
+
+        .section h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-bottom: 1px solid lightgray;
+            padding-bottom: 8px;
+            color: dark;
+        }
+
+        .section p {
+            margin: 5px 0;
+        }
+
+        .orders-list, .returns-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .orders-list li, .returns-list li {
+            background: white;
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid white;
+        }
+
+        .orders-list li strong {
+            color: lightgray;
+        }
+
+        .orders-list ul {
+            margin-top: 8px;
+            margin-left: 15px;
+            font-size: 14px;
+            color: lightgray;
+        }
+
+        .status-paid {
+            color: green;
+            font-weight: bold;
+        }
+        .status-unpaid {
+            color: red;
+            font-weight: bold;
+        }
+        .status-return-approved {
+            color: green;
+        }
+        .status-return-pending {
+            color: orange;
+        }
+
+        .logout-btn {
+            text-align: right;
+            margin: 40px 0 20px; 
+        }
+
+    .logout-btn a {
+        display: inline-block;
+        padding: 10px 20px;
+        background: black;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+
+    .logout-btn a:hover {
+        background: rgb(234, 84, 84);
+    }
+
+    .order-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .order-card {
+    border: 1px solid whitesmoke;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 5px;
+   }
+
+    .order-card p {
+        margin: 5px;
+        font-size: 15px;
+    }
+
+    .order-items ul {
+        list-style: none;
+        margin: 10px 0 0;
+        padding: 0;
+    }
+
+    .order-items li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        padding: 8px;
+        border-radius: 6px;
+    }
+
+    .order-item img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+     /* FOOTER */
+    footer {
+        background: black;
+        padding: 20px 0;
+        border-top: 1px solid black;
+        margin-top: 30px;
+    }
+
+    .footer-container {
+        max-width: 1100px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer-column h3 {
+        margin-bottom: 10px;
+        color: white;
+        text-align: left;
+    }
+
+    .footer-column a {
+        display: block;
+        text-decoration: none;
+        text-align: left;
+        color: white;
+        margin-bottom: 5px;
+    }
+
+    .footer-column a:hover {
+        text-decoration: underline;
+    }
+    
+    .footer-column p {
+        color: white;
+        text-align: left;
+    }   
+
+
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="search-box">
+            <form method="get" action="{% url 'home:search' %}">
+                <input type="text" name="q" placeholder="Caută produse...">
+                <!-- <button type="submit">Caută</button> -->
+            </form>
+        </div>
+
+        <div class="logo">
+            <a href="{% url 'home:home' %}">FeldeFel</a>
+        </div>
+
+        <nav class="nav-links">
+            <a href="{% url 'home:despre' %}">Despre noi</a>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'accounts:profile' %}" class="account-link"> {{ user.first_name }} {{ user.last_name }}</a>
+                <!-- <a href="{% url 'accounts:logout' %}" class="account-link">Logout</a> -->
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="account-link">Autentificare</a>
+                {% comment %} <a href="{% url 'accounts:register' %}" class="account-link">Înregistrare</a>  {% endcomment %}
+            {% endif %}
+            <a href="{% url 'cart:cart_url' %}" class="cart-link">
+                Coș <span class="cart-badge">{{ cart_count }}</span>
+            </a>
+        </nav>
+    </header>
+
+    <nav class="categories-bar">
+        <a href="{% url 'aranjamente_flori:naturale' %}">Aranjamente flori naturale</a>
+        <a href="{% url 'aranjamente_flori:artificiale' %}">Aranjamente flori artificiale</a>
+        <a href="{% url 'decoratiuni:decoratiuni_onyx' %}">Decorațiuni din onix</a>
+        <a href="{% url 'aranjamente_ceara:wax_arrangements_url' %}">Aranjamente din ceară</a>
+        <a href="{% url 'decoratiuni:decoratiuni_rasina' %}">Decorațiuni din rășină</a>
+    </nav>
+
+    <div class="profile-container">
+        <div class="section">
+            <h3> Date personale </h3>
+            <p><strong>Nume: </strong> {{ user.first_name }} {{ user.last_name }} </p>
+            <p><strong>Email: </strong> {{ user.email }} </p>
+
+            {% if client %}
+                <p><strong>Telefon:</strong> {{ client.phone }}</p>
+                <p><strong>Adresa:</strong> {{ client.address }}, {{ client.city }} {{ client.postal_code }}</p>
+            {% endif %}
+        </div>
+    
+
+    <div class="section">    
+        <h3> Comenzile mele </h3>
+            {% if orders %}
+                <div class="orders-container">
+                    {% for order in orders %}
+                        <div class="order-card">
+                            <p>
+                                <strong>Comanda #{{ order.id }}</strong><br>
+                                Plasată la {{ order.created|date:"d M Y H:i" }}<br>
+                                Total: {{ order.get_total }} lei<br>
+                                {% if order.paid %}
+                                    <span class="status-paid">Plătită</span>
+                                {% else %}
+                                    <span class="status-unpaid">Neplătită</span>
+                                {% endif %}
+                            </p>
+                            
+                            <div class="order-items">
+                                <ul>
+                                    {% for item in order.items.all %}
+                                        <li>
+                                            {% if item.product_image %}
+                                                <!-- <img src="{{ item.product_image.url }}" alt="{{ item.product_name }}"
+                                                    style="width: 60px; height: auto; margin-right: 10px; border-radius: 4px;"> -->
+                                            {% endif %}
+                                            {{ item.product_name }} × {{ item.quantity }} = {{ item.subtotal }} lei
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Nu ai plasat nicio comandă.</p>
+            {% endif %}
+</div>
+
+
+
+
+<div class="section">
+    <h3> Retururi </h3>
+        {% if returns %}
+            <ul class="return-list">
+                {% for ret in returns %}
+                    <li>
+                        Produs: {{ ret.order_item.product_name }} <br>
+                        Comanda #{{ ret.order_item.order.id }} <br>
+                        Motiv: {{ ret.reason|default:"-fără motiv-" }} <br>
+                        Status: 
+                        {% if ret.approved %}
+                            <span class="status-return-approved">Aprobat</span>
+                        {% else %}
+                            <span class="status-return-pending">În așteptare</span>
+                        {% endif %}
+                        <br>
+                        Data cererii: {{ ret.created|date:"d M Y H:i" }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nu ai cereri de retur.</p>
+        {% endif %}        
+</div>
+
+    <div class="logout-btn">
+        <a href="{% url 'accounts:logout' %}" class="btn btn-danger">Logout</a>
+    </div>
+
+</div>
+
+<footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                
+                <h3> Date comerciale </h3>
+                <p> Fel de Fel S.R.L </p>
+                <p> J23/1509/2025 </p>
+                <p> RO 20018365 </p>
+                <p> Str. Progresului, nr.10, Sector 2, București, </p>
+                <p> România </p>
+                <p> +40 723907533 </p>
+            </div>
+
+            <div class="footer-column">
+                <h3> Legal </h3>
+                <p> Politica de confidențialitate </p>
+                <p> Termeni și condiții </p>
+                <p> Politica de retur </p>
+                <p> ANPC </p>
+
+            </div>
+
+            <div class="footer-column">
+                <h3> Link-uri rapide </h3>
+                <a href="{% url 'home:home' %}">Acasă</a>
+                <a href="{% url 'home:despre' %}">Despre noi</a>
+                <!-- <a href="{% url 'home:categorii' %}">Categorii</a> -->
+
+                <a href="{% url 'aranjamente_flori:naturale' %}"> Flori naturale </a>
+                <a href="{% url 'aranjamente_flori:artificiale' %}"> Flori artificiale </a>
+                <a href="{% url 'decoratiuni:decoratiuni_onyx' %}"> Decorațiuni onix </a>
+                <a href="{% url 'aranjamente_ceara:wax_arrangements_url' %}"> Decorațiuni ceară </a>
+                <a href="{% url 'decoratiuni:decoratiuni_rasina' %}"> Decorațiuni rășină </a>     
+            </div>
+
+            <div class="footer-column">
+                <h3> Contact </h3>
+                <p> Email: contact@feldefel.ro </p>
+                <p> Telefon: +40 723907533 </p>
+            </div>
+        </div>
+</footer>
+
+</body>
+</html>

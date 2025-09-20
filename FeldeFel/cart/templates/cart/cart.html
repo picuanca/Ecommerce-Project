@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        body {
+            margin: 5px;
+            font-family: cursive;
+            background-color: white;
+        }
+
+        .top-bar {
+            background-color: white;
+            color:black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .top-bar .logo a{
+            font-size: 24px;
+            font-family: cursive;
+            color: black;
+            text-decoration: none;
+        }
+
+        .top-bar a {
+            color: black;
+            text-decoration: none;
+            margin: 0 10px;
+        }       
+
+        .top-bar .search-box input {
+            padding: 5px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .top-bar .search-box button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+
+        .categories-bar {
+            color:black;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .categories-bar a {
+            color: black;
+            text-decoration: none;
+            padding: 0 15px;
+        }
+
+        .categories-bar a:hover {
+            color: black;
+            text-decoration: underline;
+            /* margin: 0 15px; */
+
+        }
+
+
+        h2 {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 20px;
+        }
+
+        .cart-list {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .cart-link {
+            position: relative;
+            font-weight: normal;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .cart-badge {
+            background-color: rgb(237, 96, 96);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 12px;
+            vertical-align: middle;
+            line-height: 1;
+            min-width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-item {
+            background-color: whitesmoke;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .cart-item img {
+            width: 70px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-details {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+
+        .product-details h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .product-details p {
+            margin: 5px 0;
+            font-size: 13px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-controls input[type="submit"] {
+            padding: 6px 12px;
+            border: none;
+            background-color: whitesmoke;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .quantity-controls input[type="submit"]:hover {
+            background-color: lightgrey;
+        }
+
+        .cart-total {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 30px 0;
+        }
+
+        .clear-cart {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .clear-cart input[type="submit"] {
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .clear-cart input[type="submit"]:hover {
+            background-color:darkgrey;
+        }
+
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .product-details {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .quantity-controls {
+                margin-top: 10px;
+            }
+        }
+
+        .checkout-button {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .checkout-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .empty-cart {
+            text-align: center;
+            font-size: larger ;
+            /* font-weight: bold; */
+            color: black;
+            padding: 20px;
+            margin-bottom: 150px;
+            border-radius: 8px;            
+        }
+
+        /* FOOTER */
+        footer {
+            background: black;
+            padding: 20px 0;
+            border-top: 1px solid black;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .footer-column h2 {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            display: block;
+            text-decoration: none;
+            text-align: left;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-column p {
+            color: white;
+            text-align: left;
+        }
+
+        h2 {
+            color: white;
+            text-align: left;
+        }
+</style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="search-box">
+            <form method="get" action="{% url 'home:search' %}">
+                <input type="text" name="q" placeholder="Caută produse...">
+                <!-- <button type="submit">Caută</button> -->
+            </form>
+        </div>
+        <!-- <div class="search-box">
+            <form action="" method="get">
+                <input type="text" name="q" placeholder="Cauta produse...">
+            </form>
+        </div> -->
+
+        <div class="logo">
+            <a href="{% url 'home:home' %}">FeldeFel</a>
+        </div>
+
+        
+
+        <nav class="nav-links">
+            <a href="{% url 'home:despre' %}">Despre noi</a>
+            
+            {% if user.is_authenticated %}
+                <a href="{% url 'accounts:profile' %}" class="account-link"> {{ user.first_name }} {{ user.last_name }}</a>
+                <!-- <a href="{% url 'accounts:logout' %}" class="account-link">Logout</a> -->
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="account-link">Autentificare</a>
+                {% comment %} <a href="{% url 'accounts:register' %}" class="account-link">Înregistrare</a>  {% endcomment %}
+            {% endif %}
+            <a href="{% url 'cart:cart_url' %}" class="cart-link">
+                Coș <span class="cart-badge">{{ cart_count }}</span>
+            </a>
+            
+            {% comment %} <a href="{% url 'cart:cart_url' %}">Coș</a> {% endcomment %}
+        </nav>
+    </header>
+
+    <nav class="categories-bar">
+        <!-- <a href="{% url 'home:categorii' %}">Toate categoriile</a> -->
+        <a href="{% url 'aranjamente_flori:naturale' %}">Aranjamente flori naturale</a>
+        <a href="{% url 'aranjamente_flori:artificiale' %}">Aranjamente flori artificiale</a>
+        <a href="{% url 'decoratiuni:decoratiuni_onyx' %}">Decorațiuni din onix</a>
+        <a href="{% url 'aranjamente_ceara:wax_arrangements_url' %}">Aranjamente din ceară</a>
+        <a href="{% url 'decoratiuni:decoratiuni_rasina' %}">Decorațiuni din rășină</a>
+    </nav>
+    
+    <h2> Coș cumpărături </h2>
+     
+    <div class="cart-list">
+        {% if cart %}
+            {% for slug, produs in cart.items %}
+                <div class="cart-item">
+                    {% if produs.image %}
+                        <img src="{{ produs.image }}" alt="{{ produs.name }}">
+                    {% endif %}
+                    <div class="product-details">
+                        <h3>{{ produs.name }}</h3>
+                        <p>Preț: {{ produs.price }} lei</p>
+                        <p>Subtotal: {{ produs.subtotal }} lei</p>
+                    </div>
+                    <div class="quantity-controls">
+                        <form action="{% url 'cart:decrease_url' slug %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="−">
+                        </form>
+                        <span>{{ produs.quantity }}</span>
+                        <form action="{% url 'cart:increase_url' slug %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="+">
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+                      
+            <div class="cart-total">Total: {{ total }} lei</div>
+
+            <div class="checkout-button">
+                <a href="{% url 'orders:checkout' %}"> Finalizare comandă </a>
+            </div>
+
+            <div class="clear-cart">
+                <form action="{% url 'cart:clear_cart_url' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Golește coșul">
+                </form>
+            </div>
+        {% else %}
+            <p class="empty-cart"> Coșul este gol ... </p>
+        {% endif %} 
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h2> Date comerciale </h2>
+                <p> Fel de Fel S.R.L </p>
+                <p> J23/1509/2025 </p>
+                <p> RO 20018365 </p>
+                <p> Str. Progresului, nr.10, Sector 2, București, </p>
+                <p> România </p>
+                <p> +40 723907533 </p>
+            </div>
+
+            <div class="footer-column">
+                <h2> Legal </h2>
+                <p> Politica de confidențialitate </p>
+                <p> Termeni și condiții </p>
+                <p> Politica de retur </p>
+                <p> ANPC </p>
+
+            </div>
+
+            <div class="footer-column">
+                <h2> Link-uri rapide </h2>
+                <a href="{% url 'home:home' %}">Acasă</a>
+                <a href="{% url 'home:despre' %}">Despre noi</a>
+                <!-- <a href="{% url 'home:categorii' %}">Categorii</a> -->
+
+                <a href="{% url 'aranjamente_flori:naturale' %}"> Flori naturale </a>
+                <a href="{% url 'aranjamente_flori:artificiale' %}"> Flori artificiale </a>
+                <a href="{% url 'decoratiuni:decoratiuni_onyx' %}"> Decorațiuni onix </a>
+                <a href="{% url 'aranjamente_ceara:wax_arrangements_url' %}"> Decorațiuni ceară </a>
+                <a href="{% url 'decoratiuni:decoratiuni_rasina' %}"> Decorațiuni rășină </a>     
+            </div>
+
+            <div class="footer-column">
+                <h2> Contact </h2>
+                <p> Email: contact@feldefel.ro </p>
+                <p> Telefon: +40 723907533 </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

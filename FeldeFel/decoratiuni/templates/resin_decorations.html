@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decorațiuni din Rășină</title>
+    <style>
+        body {
+            margin: 5px;
+            font-family: cursive;
+            background-color: white;
+            }
+
+        .top-bar {
+            background-color: white;
+            color:black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .top-bar .logo a {
+            font-size: 24px;
+            font-family: cursive;
+            color: black;
+            text-decoration: none;
+        }
+
+        .top-bar a {
+            color: black;
+            text-decoration: none;
+            margin: 0 10px;
+        }       
+    
+        .top-bar .search-box input {
+            padding: 5px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .top-bar .search-box button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+
+        .cart-link {
+            position: relative;
+            font-weight: normal;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .cart-badge {
+            background-color: rgb(237, 96, 96);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 12px;
+            vertical-align: middle;
+            line-height: 1;
+            min-width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .categories-bar {
+            color:black;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .categories-bar a {
+            color: black;
+            text-decoration: none;
+            padding: 0 15px;
+        }
+
+        .categories-bar a:hover {
+            color: black;
+            text-decoration: underline;
+            /* margin: 0 15px; */
+        }
+
+    .products-section {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .products-grid {
+        display: grid;
+        flex-wrap: wrap;
+        justify-content: center;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        margin-top: 20px;
+        padding: 0 200px;
+    }
+
+    .product-card {
+        width: 220px;
+        background-color: white;
+        border: 1 solid;
+        border-radius: 8px;
+        padding: 10px;
+        text-align: center;
+        transition: 0.3s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card:hover {
+        transform:scale(1.03)
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+    .product-name {
+        margin: 10px 0 5px;
+        font-family: cursive;
+        font-size: 16px;
+    }
+
+    .product-price {
+        color:black;
+        font-size: 14px;
+    }
+
+    .product-card form button {
+        padding: 8px 15px;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: cursive;
+        margin-top: 10px;
+        transition: 0.3s;
+    }
+
+    .product-card form button:hover {
+        background-color: #444;
+    }
+
+    /* FOOTER */
+    footer {
+        background: black;
+        padding: 20px 0;
+        border-top: 1px solid black;
+        margin-top: 30px;
+    }
+
+    .footer-container {
+        max-width: 1100px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer-column h3 {
+        margin-bottom: 10px;
+    }
+
+    .footer-column a {
+        display: block;
+        text-decoration: none;
+        text-align: left;
+        color: white;
+        margin-bottom: 5px;
+    }
+
+    .footer-column a:hover {
+        text-decoration: underline;
+    }
+    
+    .footer-column p {
+        color: white;
+        text-align: left;
+    }
+
+    h3 {
+        color: white;
+        text-align: left;
+    }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="search-box">
+            <form method="get" action="{% url 'home:search' %}">
+                <input type="text" name="q" placeholder="Caută produse...">
+                <!-- <button type="submit">Caută</button> -->
+            </form>
+        </div>
+
+        <div class="logo">
+            <a href="{% url 'home:home' %}">FeldeFel</a>
+        </div>
+
+        
+        <nav class="nav-links">
+            <a href="{% url 'home:despre' %}">Despre noi</a>
+            
+            {% if user.is_authenticated %}
+                <a href="{% url 'accounts:profile' %}" class="account-link"> {{ user.first_name }} {{ user.last_name }}</a>
+                <!-- <a href="{% url 'accounts:logout' %}" class="account-link">Logout</a> -->
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="account-link">Autentificare</a>
+                {% comment %} <a href="{% url 'accounts:register' %}" class="account-link">Înregistrare</a>  {% endcomment %}
+            {% endif %}
+            <a href="{% url 'cart:cart_url' %}" class="cart-link">
+                Coș <span class="cart-badge">{{ cart_count }}</span>
+            </a>
+        </nav>
+    </header>
+
+    <nav class="categories-bar">
+        <!-- <a href="{% url 'home:categorii' %}">Toate categoriile</a> -->
+        <a href="{% url 'aranjamente_flori:naturale' %}">Aranjamente flori naturale</a>
+        <a href="{% url 'aranjamente_flori:artificiale' %}">Aranjamente flori artificiale</a>
+        <a href="{% url 'decoratiuni:decoratiuni_onyx' %}">Decorațiuni din onix</a>
+        <a href="{% url 'aranjamente_ceara:wax_arrangements_url' %}">Aranjamente din ceară</a>
+        <a href="{% url 'decoratiuni:decoratiuni_rasina' %}">Decorațiuni din rășină</a>
+    </nav>
+
+    <section class="products-section">
+        <div class="products-grid">
+           {% for produs in produse %} 
+                <div class="product-card">
+                    <a href="{% url 'decoratiuni:detalii_rasina' produs.slug %}">
+                        <img src="{{ produs.image.url }}" alt="{{ produs.name }}">
+                    </a>
+                    <p class="product-name"> {{ produs.name }}</p>
+                    <p class="product-price"> {{ produs.price }} lei </p>
+
+                    <form method="post" action="{% url 'cart:add_to_cart_url' produs.slug %}">
+                        {% csrf_token %}
+                        <!-- <label for="quantity_{{ produs.slug }}">Cantitate:</label> -->
+                        <!-- <input type="number" id="quantity_{{ produs.slug }}" name="quantity" min="1" value="1" required> -->
+                        <button type="submit">Adaugă în coș</button>
+                    </form>
+                </div>
+            {% empty %}
+                <p>Nu există produse disponibile momentan.</p>
+            {% endfor %}   
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                
+                <h3> Date comerciale </h3>
+                <p> Fel de Fel S.R.L </p>
+                <p> J23/1509/2025 </p>
+                <p> RO 20018365 </p>
+                <p> Str. Progresului, nr.10, Sector 2, București, </p>
+                <p> România </p>
+                <p> +40 723907533 </p>
+            </div>
+
+            <div class="footer-column">
+                <h3> Legal </h3>
+                <p> Politica de confidențialitate </p>
+                <p> Termeni și condiții </p>
+                <p> Politica de retur </p>
+                <p> ANPC </p>
+
+            </div>
+
+            <div class="footer-column">
+                <h3> Link-uri rapide </h3>
+                <a href="{% url 'home:home' %}">Acasă</a>
+                <a href="{% url 'home:despre' %}">Despre noi</a>
+                <!-- <a href="{% url 'home:categorii' %}">Categorii</a> -->
+
+                <a href="{% url 'aranjamente_flori:naturale' %}"> Flori naturale </a>
+                <a href="{% url 'aranjamente_flori:artificiale' %}"> Flori artificiale </a>
+                <a href="{% url 'decoratiuni:decoratiuni_onyx' %}"> Decorațiuni onix </a>
+                <a href="{% url 'aranjamente_ceara:wax_arrangements_url' %}"> Decorațiuni ceară </a>
+                <a href="{% url 'decoratiuni:decoratiuni_rasina' %}"> Decorațiuni rășină </a>     
+            </div>
+
+            <div class="footer-column">
+                <h3> Contact </h3>
+                <p> Email: contact@feldefel.ro </p>
+                <p> Telefon: +40 723907533 </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% comment %} {% for produs in produse %}
+        <div style="margin-bottom: 30px;">
+            <h2>{{ produs.name }}</h2>
+            {% if produs.image %}
+                <img src="{{ produs.image.url }}" alt="{{ produs.name }}" width="250">
+            {% endif %}
+            <p><strong>Pret:</strong> {{ produs.price }} lei</p>
+            <p>{{ produs.description }}</p>
+
+            <form method="post" action="{% url 'cart:add_to_cart_url' produs.slug %}">
+                {% csrf_token %}
+                <label for="quantity_{{ produs.slug }}">Cantitate:</label>
+                <input type="number" id="quantity_{{ produs.slug }}" name="quantity" min="1" value="1" required>
+                <button type="submit">Adauga in cos</button>
+            </form>
+        </div>
+    {% empty %}
+        <p>Nu exista produse disponibile momentan.</p>
+    {% endfor %} {% endcomment %}
+

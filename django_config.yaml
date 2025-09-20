@@ -1,0 +1,43 @@
+# Schimba PROJECT_NAME cu numele proiectului
+FeldeFel:  
+        # Schimba APP_NAME1 cu numele aplicatiei
+        home:
+            - view_name: home
+              url_path_name: ""
+              template_name: home
+
+        aranjamente_flori:
+
+            - view_name: natural_flowers
+              url_path_name: naturale
+              template_name: natural_flowers
+            - view_name: artificial_flowers
+              url_path_name: artificiale
+              template_name: artificial_flowers
+
+        # Schimba APP_NAME2 cu numele aplicatiei
+        aranjamente_ceara:
+            - view_name: wax_arrangements
+              url_path_name: ceara
+              template_name: wax_arrangements
+
+        # Mai adauga aplicatii si view-uri in acest fel
+        decoratiuni:
+            - view_name: onyx_decorations
+              url_path_name: onyx
+              template_name: onyx_decorations
+            - view_name: resin_decorations
+              url_path_name: rasina
+              template_name: resin_decorations
+
+        # Mai adauga aplicatii si view-uri in acest fel
+        cart:
+            - view_name: cart_view
+              url_path_name: cart
+              template_name: cart
+
+        # Mai adauga aplicatii si view-uri in acest fel  
+        orders:  
+            - view_name: orders_view
+              url_path_name: orders
+              template_name: orders
